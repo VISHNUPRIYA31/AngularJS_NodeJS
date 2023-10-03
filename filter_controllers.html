@@ -1,0 +1,61 @@
+<html>
+<head>
+ <title>Filters - $Filter Examples</title>
+</head>
+<body ng-app="myApp" ng-controller="FilterController">
+ 
+ <div class="container">
+ 
+ <b>Uppercase Example:</b> {{UppercaseName}}<br/>
+ <b>Lowercase Example:</b> {{lowerCase}}<br/>
+ <b>Currency Example:</b> {{filterCurrency}}<br/>
+ <b>Number Example:</b> {{filterValue}}<br/> 
+ <b>Order Example: </b> {{orderEmployees}}<br/>
+ <b>Filter Example: </b> {{filterEmployees}}<br/> <br/>
+ <b>Date Examples: </b> {{formatDate}}<br/>
+ 
+ FullDate: {{fullDate}}<br/>
+ LongDate: {{longDate}}<br/>
+ MediumDate: {{mediumDate}}<br/>
+ ShortDate: {{shortDate}}<br/>
+ yyyy-MM-dd: {{anotherDate}}<br/>
+ Input Box: <input ng-model="anotherDate" /><br/><br/>
+ <b>Limit To Example:</b> {{limitText}}<br/>
+</body>
+ <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.2/angular.min.js"></script>
+ <script>
+
+ var app = angular.module('myApp',[]);
+ app.controller('FilterController',['$scope','$filter',function( $scope,$filter){
+ var currency = 120.00;
+ var value = 256.2356
+ var hello="Hi Hello. Howz the day"
+ $scope.filterCurrency = $filter('currency')(currency,'IN',1);
+ $scope.UppercaseName = $filter('uppercase')(hello);
+ $scope.lowerCase = $filter('lowercase')(hello);
+ $scope.filterValue = $filter('number')(value,2); //converts to string upto two decimal points
+ $scope.formatDate = $filter('date')(new Date(),'dd-MM-yyyy');
+ $scope.numbers=[1,2,3,4,5,6,7,8,9,10];
+ $scope.limitText=$filter('limitTo')("Hello,This is Jayaram",5,2);
+ $scope.employees = [
+ {empName: 'vijay', sex: 'M', salary: 10000},
+ {empName: 'Aruna', sex: 'F', salary: 25000},
+ {empName: 'Jayaram', sex: 'M', salary: 23000},
+ {empName: 'john', sex: 'M', salary: 980000},
+ {empName: 'Rashmi', sex: 'F', salary: 12233},
+ ];
+ $scope.filterEmployees = $filter('filter')($scope.employees ,{empName:'vijay'});
+ $scope.orderEmployees = $filter('orderBy')( $scope.employees,'empName');
+ var today = new Date();
+$scope.fullDate= $filter('date')(today,'fullDate');
+$scope.longDate= $filter('date')(today,'longDate');
+$scope.mediumDate= $filter('date')(today,'mediumDate');
+$scope.shortDate= $filter('date')(today,'shortDate');
+$scope.shortDate= $filter('date')(today,'shortDate');
+$scope.anotherDate= $filter('date')(today,'yyyy-MM-dd');
+
+
+ }]);
+ 
+ </script>
+</html>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html ng-app="textEditorApp">
+<head>
+    <title>Real-Time Text Editor</title>
+    <script src="https://code.angularjs.org/1.6.9/angular.min.js"></script>
+</head>
+<body ng-controller="textEditorController">
+
+    <h1>Real-Time Text Editor</h1>
+
+    <label for="textArea">Enter Text:</label>
+    <textarea id="textArea" ng-model="editorText"></textarea>
+
+    <p>
+        Text Entered:
+    </p>
+    <div ng-bind="editorText"></div>
+
+    <script>
+        angular.module('textEditorApp', [])
+            .controller('textEditorController', function ($scope) {
+                $scope.editorText = '';
+            });
+    </script>
+</body>
+</html>

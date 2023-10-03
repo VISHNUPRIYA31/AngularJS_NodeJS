@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Angular Hello World</title>
+    <!-- Include Angular script (Angular CLI usually handles this) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular/12.2.0/angular.min.js"></script>
+</head>
+<body>
+    <app-root></app-root>
+
+    <script>
+        // Define an Angular module
+        var app = angular.module("myApp", []);
+
+        // Define an Angular component
+        app.component("appRoot", {
+            template: '<h1>{{ greeting }}</h1>',
+            controller: function() {
+                this.greeting = "Hello, World!";
+            }
+        });
+
+        // Bootstrap the Angular application
+        angular.bootstrap(document, ["myApp"]);
+    </script>
+</body>
+</html>

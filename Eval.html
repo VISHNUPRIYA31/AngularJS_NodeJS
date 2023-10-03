@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html ng-app="evalApp">
+<head>
+    <title>AngularJS $eval</title>
+    <script src="https://code.angularjs.org/1.6.9/angular.min.js"></script>
+</head>
+<body ng-controller="EvalController">
+
+    <h1>AngularJS $eval</h1>
+
+    <p>Result of $eval expression: {{ result }}</p>
+
+    <script>
+        angular.module('evalApp', [])
+            .controller('EvalController', function ($scope) {
+                $scope.expression = '5 + 3'; // Dynamic expression as a string
+                $scope.result = $scope.$eval($scope.expression);
+            });
+    </script>
+</body>
+</html>

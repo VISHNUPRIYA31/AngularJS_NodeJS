@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+</head>
+<body>
+
+<div ng-controller="ProductController">
+    <h1>Product List</h1>
+    
+    <!-- Uppercase Filter -->
+    <h2>Uppercase Filter</h2>
+    <ul>
+        <li ng-repeat="product in products">{{ product.name | uppercase }}</li>
+    </ul>
+    
+    <!-- Lowercase Filter -->
+    <h2>Lowercase Filter</h2>
+    <ul>
+        <li ng-repeat="product in products">{{ product.name | lowercase }}</li>
+    </ul>
+    
+    <!-- Currency Filter -->
+    <h2>Currency Filter</h2>
+    <ul>
+        <li ng-repeat="product in products">{{ product.price | currency }}</li>
+    </ul>
+    
+    <!-- Filter Filter (by category) -->
+    <h2>Filter Filter (by category)</h2>
+    <label for="categoryFilter">Filter by Category: </label>
+    <input type="text" id="categoryFilter" ng-model="categoryFilter">
+    <ul>
+        <li ng-repeat="product in products | filter: categoryFilter">{{ product.name }}</li>
+    </ul>
+    
+    <!-- OrderBy Filter (by price) -->
+    <h2>OrderBy Filter (by price)</h2>
+    <label for="priceOrder">Order by Price: </label>
+    <select id="priceOrder" ng-model="priceOrder">
+        <option value="price">Low to High</option>
+        <option value="-price">High to Low</option>
+    </select>
+    <ul>
+        <li ng-repeat="product in products | orderBy: priceOrder">{{ product.name }} - {{ product.price | currency }}</li>
+    </ul>
+</div>
+
+<script>
+var app = angular.module('myApp', []);
+
+app.controller('ProductController', function($scope) {
+    $scope.products = [
+        { name: 'Laptop', category: 'Electronics', price: 999.99 },
+        { name: 'Tablet', category: 'Electronics', price: 349.99 },
+        { name: 'T-shirt', category: 'Clothing', price: 19.99 },
+        { name: 'Shoes', category: 'Clothing', price: 59.99 },
+        { name: 'Book', category: 'Books', price: 12.99 }
+    ];
+});
+</script>
+
+</body>
+</html>

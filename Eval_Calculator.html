@@ -1,0 +1,25 @@
+-<!DOCTYPE html>
+<html ng-app="calculatorApp">
+<head>
+    <title>AngularJS Calculator</title>
+    <script src="https://code.angularjs.org/1.6.9/angular.min.js"></script>
+</head>
+<body ng-controller="CalculatorController">
+    <h1>AngularJS Calculator</h1>
+    <input type="text" ng-model="expression" placeholder="Enter a mathematical expression">
+    <button ng-click="calculate()">Calculate</button>
+    <div>
+        <p>Expression: {{ expression }}</p>
+        <p>Result: {{ result }}</p>
+    </div>
+
+    <script>
+        angular.module('calculatorApp', [])
+            .controller('CalculatorController', function ($scope) {
+                $scope.calculate = function () {
+                    $scope.result = $scope.$eval($scope.expression);
+                };
+            });
+    </script>
+</body>
+</html>

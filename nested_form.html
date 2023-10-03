@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+</head>
+<body>
+
+<div ng-controller="FormController">
+    <form name="mainForm" novalidate>
+        <h1>Main Form</h1>
+        
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" ng-model="user.username" required>
+        
+        <form name="nestedForm" novalidate>
+            <h2>Nested Form</h2>
+            
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" ng-model="user.email" required>
+            
+            <button type="button" ng-click="submitNestedForm()" ng-disabled="nestedForm.$invalid">Submit Nested Form</button>
+        </form>
+        
+        <button type="submit" ng-click="submitMainForm()" ng-disabled="mainForm.$invalid">Submit Main Form</button>
+    </form>
+
+    <p ng-show="mainFormSubmitted">Main Form submitted successfully!</p>
+    <p ng-show="nestedFormSubmitted">Nested Form submitted successfully!</p>
+</div>
+
+<script>
+var app = angular.module('myApp', []);
+
+app.controller('FormController', function($scope) {
+    $scope.user = {};
+    $scope.mainFormSubmitted = false;
+    $scope.nestedFormSubmitted = false;
+
+    $scope.submitMainForm = function() {
+        if ($scope.mainForm.$valid) {
+            // Process the main form data.
+            $scope.mainFormSubmitted = true;
+        }
+    };
+
+    $scope.submitNestedForm = function() {
+        if ($scope.nestedForm.$valid) {
+            // Process the nested form data.
+            $scope.nestedFormSubmitted = true;
+        }
+    };
+});
+</script>
+
+</body>
+</html>

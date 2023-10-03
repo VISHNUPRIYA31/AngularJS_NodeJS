@@ -1,0 +1,72 @@
+<!--
+In AngularJS, some directives can be used to 
+bind application data to attributes of HTML DOM elements.
+
+These directives are:
+Directive	Description
+ng-disabled -> It disables a given control.
+ng-show -> It shows a given control.
+ng-hide -> It hides a given control.
+ng-click -> It represents an AangularJS click event.
+-->
+
+<!DOCTYPE html>
+<html ng-app="myApp">
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+</head>
+<body>
+
+<div ng-controller="StudentController">
+    <button  ng-disabled="isDisabledtog" ng-click="toggleVisibility()">Toggle Student Info</button>
+    <button ng-disabled="isDisabled" ng-click="toggleDisabled()">Toggle Disabled</button>
+    <h2> STUDENT INFORMATION</h2>
+    <div ng-show="showStudentInfo">
+        <p><b>NAME :</b> {{ student.name }}</p>
+        <p><b>AGE :</b> {{ student.age }}</p>
+        <p><b>GRADE :</b> {{ student.grade }}</p>
+        <button ng-show="showMoreDetails" ng-click="hideDetails()">Hide Personal Info</button>
+        <button ng-hide="showMoreDetails" ng-click="showDetails()">Show Personal Info</button>
+        <p ng-show="showMoreDetails">Email: {{ student.email }}</p>
+        <p ng-show="showMoreDetails">Contact Number: {{ student.phno }}</p>
+    </div>
+</div>
+
+<script>
+var app = angular.module('myApp', []);
+
+app.controller('StudentController', function($scope) {
+    $scope.isDisabled = false;
+    $scope.isDisabledtog = false;
+    $scope.showStudentInfo = false;
+    $scope.showMoreDetails = false;
+    $scope.student = {
+        name: 'VISHNU',
+        age: 19,
+        grade: 'A',
+        email: 'vishnu@gmail.com',
+        phno: 9874563210
+    };
+
+    $scope.toggleVisibility = function() {
+        $scope.showStudentInfo = !$scope.showStudentInfo;
+        $scope.showMoreDetails = false;
+    };
+
+    $scope.toggleDisabled = function() {
+        $scope.isDisabled = true;
+        $scope.isDisabledtog = true;
+    };
+
+    $scope.hideDetails = function() {
+        $scope.showMoreDetails = false;
+    };
+
+    $scope.showDetails = function() {
+        $scope.showMoreDetails = true;
+    };
+});
+</script>
+
+</body>
+</html>

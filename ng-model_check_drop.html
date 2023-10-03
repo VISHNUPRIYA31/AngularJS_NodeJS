@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html ng-app="formApp">
+<head>
+    <title>Form Example with ng-model</title>
+    <script src="https://code.angularjs.org/1.6.9/angular.min.js"></script>
+</head>
+<body ng-controller="formController">
+
+    <h1>Information </h1>
+
+    <form>
+        <label for="nameInput">Name:</label>
+        <input type="text" id="nameInput" ng-model="user.name">
+        <br><br><br>
+
+        <label for="emailInput">Email:</label>
+        <input type="email" id="emailInput" ng-model="user.email">
+        <br><br><br>
+
+        <label for="phoneInput">Phone Number:</label>
+        <input type="tel" id="phoneInput" ng-model="user.phone">
+        <br><br><br>
+
+        <label for="languageSelect">Favorite Programming Language:</label>
+        <select id="languageSelect" ng-model="user.language">
+            <option value="javascript">JavaScript</option>
+            <option value="python">Python</option>
+            <option value="java">Java</option>
+            <option value="csharp">C#</option>
+        </select>
+        <br><br><br>
+        <label>Programming Skills:</label>
+        <input type="checkbox" id="jsSkill" ng-model="user.skills.js">
+        <label for="jsSkill">JavaScript</label>
+        <br><br><br>
+        <input type="checkbox" id="pySkill" ng-model="user.skills.py">
+        <label for="pySkill">Python</label>
+        <br><br><br>
+        <input type="checkbox" id="javaSkill" ng-model="user.skills.java">
+        <label for="javaSkill">Java</label>
+        <br><br><br>
+        <input type="checkbox" id="csharpSkill" ng-model="user.skills.csharp">
+        <label for="csharpSkill">C#</label>
+        <br><br><br>
+    </form>
+
+    <h2>Your Information:</h2>
+    <p>Name: {{ user.name }}</p>
+    <p>Email: {{ user.email }}</p>
+    <p>Phone Number: {{ user.phone }}</p>
+    <p>Favorite Language: {{ user.language }}</p>
+    <p>Programming Skills:</p>
+    <ul>
+        <li ng-if="user.skills.js">JavaScript</li>
+        <li ng-if="user.skills.py">Python</li>
+        <li ng-if="user.skills.java">Java</li>
+        <li ng-if="user.skills.csharp">C#</li>
+    </ul>
+
+    <script>
+        angular.module('formApp', [])
+            .controller('formController', function ($scope) {
+                $scope.user = {
+                    name: '',
+                    email: '',
+                    phone: '',
+                    language: '',
+                    skills: {
+                        js: false,
+                        py: false,
+                        java: false,
+                        csharp: false
+                    }
+                };
+            });
+    </script>
+</body>
+</html>

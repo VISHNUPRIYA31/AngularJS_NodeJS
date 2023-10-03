@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html ng-app="formApp">
+<head>
+    <title>Form Example with ng-model</title>
+    <script src="https://code.angularjs.org/1.6.9/angular.min.js"></script>
+</head>
+<body ng-controller="formController">
+
+    <h1>Information Form</h1>
+
+    <form>
+        <label for="nameInput">Name:</label>
+        <input type="text" id="nameInput" ng-model="user.name">
+        <br><br><br>
+        <label for="emailInput">Email:</label>
+        <input type="email" id="emailInput" ng-model="user.email">
+        <br><br><br>
+        <label for="phoneInput">Phone Number:</label>
+        <input type="tel" id="phoneInput" ng-model="user.phone">
+        <br><br><br>
+    </form>
+
+    <h2>Your Information:</h2>
+    <p>Name: {{ user.name }}</p>
+    <p>Email: {{ user.email }}</p>
+    <p>Phone Number: {{ user.phone }}</p>
+
+    <script>
+        angular.module('formApp', [])
+            .controller('formController', function ($scope) {
+                $scope.user = {
+                    name: '',
+                    email: '',
+                    phone: ''
+                };
+            });
+    </script>
+</body>
+</html>

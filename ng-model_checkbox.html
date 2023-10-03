@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html ng-app="checkboxApp">
+<head>
+    <title>Checkbox Example with AngularJS</title>
+    <script src="https://code.angularjs.org/1.6.9/angular.min.js"></script>
+</head>
+<body ng-controller="checkboxController">
+
+    <h1>Select Your Favorite Programming Languages</h1>
+
+    <label>
+        <input 
+        type="checkbox" ng-model="javascriptSelected"> JavaScript
+    </label>
+
+    <label>
+        <input type="checkbox" ng-model="pythonSelected"> Python
+    </label>
+
+    <label>
+        <input type="checkbox" ng-model="javaSelected"> Java
+    </label>
+
+    <label>
+        <input type="checkbox" ng-model="csharpSelected"> C#
+    </label>
+
+    <h2>Your Selections:</h2>
+    <ol>
+        <li ng-show="javascriptSelected">JavaScript</li>
+        <li ng-show="pythonSelected">Python</li>
+        <li ng-show="javaSelected">Java</li>
+        <li ng-show="csharpSelected">C#</li>
+    </ol>
+
+    <script>
+        angular.module('checkboxApp', [])
+            .controller('checkboxController', function ($scope) {
+                // Initialize checkbox values
+                $scope.javascriptSelected = false;
+                $scope.pythonSelected = false;
+                $scope.javaSelected = false;
+                $scope.csharpSelected = false;
+            });
+    </script>
+</body>
+</html>

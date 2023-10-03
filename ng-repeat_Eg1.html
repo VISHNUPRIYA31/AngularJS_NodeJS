@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html ng-app="companiesApp">
+<head>
+    <title>AngularJS ng-repeat Example</title>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+</head>
+<body ng-controller="companiesCtrl">
+    <h1>Top Companies</h1>
+    <ul>
+        <li ng-repeat="company in companies">
+            {{ company.name }}, {{ company.location }}
+        </li>
+    </ul>
+
+    <script>
+        angular.module('companiesApp', [])
+            .controller('companiesCtrl', function ($scope) {
+                $scope.companies = [
+                    { name: 'TCS', location: 'Mumbai' },
+                    { name: 'HCL', location: 'Noida' },
+                    { name: 'Larsen & Toubro', location: 'Chennai' },
+                    { name: 'Hindustan Unilever', location: 'Mumbai' },
+                    { name: 'ITC', location: 'Kolkata' }
+                ];
+            });
+    </script>
+</body>
+</html>

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>AngularJS Calculator</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.9/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.9/angular-route.min.js"></script>
+</head>
+<body>
+
+<div ng-app="calculatorApp">
+    <h1>AngularJS Calculator</h1>
+    <ul>
+        <li><a href="#/add">Addition</a></li>
+        <li><a href="#/subtract">Subtraction</a></li>
+        <li><a href="#/multiply">Multiplication</a></li>
+        <li><a href="#/divide">Division</a></li>
+    </ul>
+    <div ng-view></div>
+</div>
+
+<script>
+    var calculatorApp = angular.module('calculatorApp', ['ngRoute']);
+
+    calculatorApp.config(function($routeProvider) {
+        $routeProvider
+            .when('/add', {
+                templateUrl: 'templates/calculator.html',
+                controller: 'CalculatorController',
+                operation: '+'
+            })
+            .when('/subtract', {
+                templateUrl: 'templates/calculator.html',
+                controller: 'CalculatorController',
+                operation: '-'
+            })
+            .when('/multiply', {
+                templateUrl: 'templates/calculator.html',
+                controller: 'CalculatorController',
+                operation: '*'
+            })
+            .when('/divide', {
+                templateUrl: 'templates/calculator.html',
+                controller: 'CalculatorController',
+                operation: '/'
+            })
+            .otherwise({
+                redirectTo: '/add'
+            });
+    });
+
+    calculatorApp.controller('CalculatorController', function($scope, $routeParams) {
+        $scope.title = 'Calculator (' + $routeParams.operation + ')';
+        $scope.num1 = 0;
+        $scope.num2 = 0;
+        $scope.result = 0;
+
+        $scope.calculate = function() {
+            switch ($routeParams.operation) {
+                case '+':
+                    $scope.result = $scope.num1 + $scope.num2;
+                    break;
+                case '-':
+                    $scope.result = $scope.num1 - $scope.num2;
+                    break;
+                case '*':
+                    $scope.result = $scope.num1 * $scope.num2;
+                    break;
+                case '/':
+                    if ($scope.num2 !== 0) {
+                        $scope.result = $scope.num1 / $scope.num2;
+                    } else {
+                        $scope.result = 'Cannot divide by zero';
+                    }
+                    break;
+                default:
+                    $scope.result = 'Invalid operation';
+                    break;
+            }
+        };
+    });
+</script>
+
+</body>
+</html>

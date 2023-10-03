@@ -1,0 +1,34 @@
+<html ng-app="ajaxapp">
+    <head>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    </head>
+    <body ng-controller="myctrl">
+        <button ng-click="getstudent()">GET STUDENT</button>
+        <hr>
+        <table border=1>
+            <tr>
+                <th>NAME</th>
+                <th>ID</th>
+            </tr>
+            <tr ng-repeat="s in students">
+                <td>{{s.Name}}</td>
+                <td>{{s.ID}}</td>
+            </tr>
+        </table>
+        <script>
+            angular.module("ajaxapp",[])
+            .controller("myctrl",function($scope,$http){
+                $scope.students = [];
+                $scope.getstudent = function(){
+                    var url = "student.json";
+                    $http.get(url)
+                    .then(function(payload){
+                        $scope.students = payload.data;
+                    }, function(message){
+                        alert("Sorry");
+                    });
+                };
+            });
+        </script>
+    </body>
+</html>

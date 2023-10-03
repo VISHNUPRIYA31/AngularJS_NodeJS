@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html ng-app="select_info">
+<head>
+    <title>Form Example with ng-model</title>
+    <script src="https://code.angularjs.org/1.6.9/angular.min.js"></script>
+</head>
+<body ng-controller="select_infoctrl">
+
+    <h1>COLLEGE INFORMATION</h1>
+
+    <label for="dept">Select the Department :</label>
+    <select id="dept" ng-model="user.dept" ng-options="x for (x, y) in dept">
+    </select>
+    <h1>Information about Department of {{user.dept.name}}</h1>  
+    <h2>Established on : {{user.dept.yoe}}</h2>  
+    <h2>Total Intake : {{user.dept.intake}}</h3>  
+<script>
+        angular.module('select_info', [])
+            .controller('select_infoctrl', function ($scope) {
+                $scope.dept = {
+                    CSE: {name:"CSE",yoe:1996,intake:240},
+                    IT: {name:"IT",yoe:2005,intake:120},
+                    AIML: {name:"AIML",yoe:2018,intake:60},
+                    ECE: {name:"ECE",yoe:2010,intake:120},
+                    EEE: {name:"EEE",yoe:2009,intake:180}
+                };
+            });
+    </script>
+</body>
+</html>

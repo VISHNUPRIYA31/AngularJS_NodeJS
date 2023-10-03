@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+</head>
+<body>
+
+<div ng-controller="MyController">
+    <h1>AngularJS Services Example</h1>
+    
+    <!-- Using $http to fetch data from a JSON API -->
+    <h2>$http Service</h2>
+    <p ng-if="loading">Loading data...</p>
+    <ul ng-if="data">
+        <li ng-repeat="item in data">{{ item.name}}</li>
+    </ul>
+    
+    <!-- Using $timeout to display a message after a delay -->
+    <h2>$timeout Service</h2>
+    <p>{{ message }}</p>
+    
+    <!-- Using $interval to update a counter every second -->
+    <h2>$interval Service</h2>
+    <p>Counter: {{ counter }}</p>
+</div>
+
+<script>
+var app = angular.module('myApp', []);
+
+app.controller('MyController', function($scope, $http, $timeout, $interval) {
+    // Example using $http
+    $scope.loading = true;
+    $http.get('https://jsonplaceholder.typicode.com/users')
+        .then(function(response) {
+            $scope.data = response.data;
+            $scope.loading = false;
+        })
+        .catch(function(error) {
+            console.error('Error fetching data:', error);
+            $scope.loading = false;
+        });
+
+   
+    $timeout(function() {
+        $scope.message = 'Data loaded!';
+    }, 5000);
+
+    $scope.counter = 0;
+    var intervalPromise = $interval(function() {
+        $scope.counter++;
+    }, 1000);
+
+    $timeout(function() {
+        $interval.cancel(intervalPromise);
+    }, 5000);
+});
+</script>
+
+</body>
+</html>

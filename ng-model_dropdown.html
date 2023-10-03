@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html ng-app="selectapp">
+<head>
+    <title>Form Example with ng-model</title>
+    <script src="https://code.angularjs.org/1.6.9/angular.min.js"></script>
+</head>
+<body ng-controller="selectappctrl">
+
+    <h1>Favorite Color</h1>
+
+    <label for="colorSelect">Select Your Favorite Color:</label>
+    <select id="colorSelect" ng-model="user.favoriteColor">
+        <option value="red">Red</option>
+        <option value="blue">Blue</option>
+        <option value="green">Green</option>
+        <option value="yellow">Yellow</option>
+        <option value="purple">Purple</option>
+    </select>
+    <br>
+
+    <h2>Your Favorite Color:</h2>
+    <p>{{ user.favoriteColor }}</p>
+
+    <script>
+     angular.module('selectapp', [])
+            .controller('selectappctrl', function ($scope) {
+                $scope.user = {
+                    favoriteColor: ''
+                };
+            });   
+    </script>
+</body>
+</html>

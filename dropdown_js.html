@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Form Example with JavaScript</title>
+</head>
+<body>
+
+    <h1>Favorite Color</h1>
+
+    <label for="colorSelect">Select Your Favorite Color:</label>
+    <select id="colorSelect">
+        <option value="red">Red</option>
+        <option value="blue">Blue</option>
+        <option value="green">Green</option>
+        <option value="yellow">Yellow</option>
+        <option value="purple">Purple</option>
+    </select>
+    <br>
+
+    <h2>Your Favorite Color:</h2>
+    <p id="displayColor"></p>
+
+    <script>
+        colorSelect = document.getElementById('colorSelect');
+       displayColor = document.getElementById('displayColor');
+        colorSelect.addEventListener('change', function() {
+            selectedColor = colorSelect.value;
+            displayColor.textContent = selectedColor;
+        });
+    </script>
+</body>
+</html>

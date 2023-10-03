@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html ng-app="cartApp">
+<head>
+    <title>AngularJS ng-repeat Example</title>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+</head>
+<body ng-controller="CartController">
+
+    <h1>Shopping Cart</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Product</th>
+                <th>Price</th>
+                <th>Quantity</th>
+                <th>Total</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="product in cart">
+                <td>{{ product.name }}</td>
+                <td>{{ product.price | currency }}</td>
+                <td>{{ product.quantity }}</td>
+                <td>{{ product.price * product.quantity | currency }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <p>Total Cost: {{ getTotalCost() | currency }}</p>
+
+    <script>
+        angular.module('cartApp', [])
+            .controller('CartController', function ($scope) {
+                $scope.cart = [
+                    { name: 'Laptop', price: 899.99, quantity: 2 },
+                    { name: 'Smartphone', price: 499.99, quantity: 3 },
+                    { name: 'Headphones', price: 59.99, quantity: 5 },
+                    { name: 'Tablet', price: 349.99, quantity: 1 }
+                ];
+
+                // Function to calculate the total cost
+                $scope.getTotalCost = function () {
+                    var total = 0;
+                    angular.forEach($scope.cart, function (product) {
+                        total += product.price * product.quantity;
+                    });
+                    return total;
+                };
+            });
+    </script>
+</body>
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+<head>
+    <title>Simple Custom Directive Example</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+</head>
+<body>
+    <div ng-controller="MyController">
+        <p my-directive>Hover over me to change my background color!</p>
+    </div>
+
+    <script>
+        var app = angular.module('myApp', []);
+
+        app.controller('MyController', function ($scope) {
+            // Your controller logic goes here if needed
+        });
+
+        app.directive('myDirective', function () {
+            return {
+                restrict: 'A', // Attribute directive
+                link: function (scope, element) {
+                    // Add hover event listener to change background color
+                    element.on('mouseenter', function () {
+                        element.css('background-color', 'lightblue');
+                    });
+
+                    // Restore original background color on mouse leave
+                    element.on('mouseleave', function () {
+                        element.css('background-color', '');
+                    });
+                }
+            };
+        });
+    </script>
+</body>
+</html>
