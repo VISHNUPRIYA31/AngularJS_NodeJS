@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Employee Management</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 10px;
+        }
+
+        .button-container {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        input {
+            width: 25%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ddd;
+        }
+
+        button {
+            color: white;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            width: 48%;
+        }
+
+        table {
+            width: 50%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            border: 1px solid #ddd;
+        }
+
+        th, td {
+            border: 1px solid #e4c7c7;
+            padding: 10px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #232021;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <h1>Employee Management</h1>
+    <form action="/addEmployee" method="POST">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required><br>
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required><br>
+        <label for="designation">Designation:</label>
+        <input type="text" id="designation" name="designation" required><br>
+        <div class="button-container">
+            <button type="submit" style="background-color: #823d3d;">Add Employee</button>
+            <button type="button" id="retrieveDataButton" style="background-color: #4b0829;">Retrieve Employee Data</button>
+        </div>
+    </form>
+    <h2>Employee List</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Designation</th>
+            </tr>
+        </thead>
+        <tbody id="employeeList"></tbody>
+    </table>
+
+    <script>
+        // Function to retrieve data when the button is clicked
+        document.getElementById('retrieveDataButton').addEventListener('click', () => {
+            fetch('/getEmployees') // Make a GET request to /getEmployees
+                .then(response => response.json())
+                .then(data => {
+                    const employeeList = document.getElementById('employeeList');
+                    employeeList.innerHTML = ''; // Clear previous data
+
+                    data.forEach(employee => {
+                        const row = document.createElement('tr');
+                        row.innerHTML = `<td>${employee.name}</td><td>${employee.email}</td><td>${employee.designation}</td>`;
+                        employeeList.appendChild(row);
+                    });
+                })
+                .catch(error => {
+                    console.error('Error fetching data:', error);
+                });
+        });
+    </script>
+</body>
+</html>
