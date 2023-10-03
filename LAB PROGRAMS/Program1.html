@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+
+<head>
+    <title>Welcome to AngularJS</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+</head>
+
+<body ng-controller="MyController">
+
+    <h1>Welcome to AngularJS</h1>
+
+    <label for="userMessage">Enter a message: </label>
+    <input type="text" id="userMessage" ng-model="userInput" placeholder="Type your message here">
+
+    <p>You entered: {{ userInput }}</p>
+
+    <script>
+        var app = angular.module('myApp', []);
+
+        app.controller('MyController', function($scope) {
+            $scope.userInput = '';
+        });
+    </script>
+
+</body>
+
+</html>

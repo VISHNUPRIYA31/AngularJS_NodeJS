@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html ng-app="registrationApp">
+
+<head>
+    <title>Registration Form with AngularJS</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+</head>
+
+<body ng-controller="RegistrationController">
+
+    <h1>Registration Form</h1>
+
+    <form name="registrationForm" ng-submit="submitForm()" novalidate>
+
+        <!-- Personal Information -->
+        <fieldset>
+            <legend>Personal Information</legend>
+            <label for="firstName">First Name:</label>
+            <input type="text" id="firstName" ng-model="user.firstName" required>
+            <br>
+            <label for="lastName">Last Name:</label>
+            <input type="text" id="lastName" ng-model="user.lastName" required>
+            <br>
+        </fieldset>
+
+        <!-- Contact Information -->
+        <fieldset>
+            <legend>Contact Information</legend>
+            <label for="email">Email:</label>
+            <input type="email" id="email" ng-model="user.email" required>
+            <br>
+            <label for="phone">Phone:</label>
+            <input type="tel" id="phone" ng-model="user.phone" required>
+            <br>
+        </fieldset>
+
+        <!-- Password -->
+        <fieldset>
+            <legend>Password</legend>
+            <label for="password">Password:</label>
+            <input type="password" id="password" ng-model="user.password" ng-minlength="6" required>
+            <br>
+            <label for="confirmPassword">Confirm Password:</label>
+            <input type="password" id="confirmPassword" ng-model="user.confirmPassword" required>
+            <br>
+            <div ng-show="registrationForm.password.$error.minlength">
+                Password must be at least 6 characters long.
+            </div>
+        </fieldset>
+
+        <button type="submit" ng-disabled="registrationForm.$invalid">Register</button>
+
+    </form>
+
+    <div ng-show="registrationSuccess" style="color: green;">
+        Registration Successful! Welcome, {{ user.firstName }}!
+    </div>
+
+    <script>
+        var app = angular.module('registrationApp', []);
+
+        app.controller('RegistrationController', function ($scope) {
+            $scope.user = {};
+            $scope.registrationSuccess = false;
+
+            $scope.submitForm = function () {
+                $scope.registrationSuccess = true;
+            };
+        });
+    </script>
+
+</body>
+
+</html>

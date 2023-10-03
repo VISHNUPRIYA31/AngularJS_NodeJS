@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+</head>
+<body>
+
+<div ng-controller="CalculatorController">
+    <h1>Custom AngularJS Service Example</h1>
+    
+    <p>
+        Enter Number 1:
+        <input type="number" ng-model="number1">
+    </p>
+    <p>
+        Enter Number 2:
+        <input type="number" ng-model="number2">
+    </p>
+    <p>Sum: {{ mathService.add(number1, number2) }}</p>
+    <p>Subtraction: {{ mathService.subtract(number1, number2) }}</p>
+    <p>Multiplication: {{ mathService.multiply(number1, number2) }}</p>
+    <p>Division: {{ mathService.divide(number1, number2) }}</p>
+</div>
+
+<script>
+var app = angular.module('myApp', []);
+
+// Define a custom service named 'MathService'
+app.service('MathService', function() {
+    this.add = function(a, b) {
+        return a + b;
+    };
+
+    this.subtract = function(a, b) {
+        return a - b;
+    };
+
+    this.multiply = function(a, b) {
+        return a * b;
+    };
+
+    this.divide = function(a, b) {
+        if (b === 0) {
+            return 'Cannot divide by zero';
+        }
+        return a / b;
+    };
+});
+
+app.controller('CalculatorController', function($scope, MathService) {
+    // Inject the custom 'MathService' into the controller
+    $scope.number1 = 0;
+    $scope.number2 = 0;
+    $scope.mathService = MathService;
+});
+</script>
+
+</body>
+</html>
